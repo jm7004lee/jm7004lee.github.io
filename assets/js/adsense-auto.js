@@ -1,54 +1,42 @@
-document.addEventListener("DOMContentLoaded", function () {
+// 상단(H1 아래) 광고
+function createTopAdsense() {
 
-    // Chirpy 본문 찾기
-    const content =
-        document.querySelector("article .content") ||
-        document.querySelector(".post-content") ||
-        document.querySelector(".content");
+    const wrapper = document.createElement("div");
+    wrapper.style.margin = "30px 0 60px";
 
-    if (!content) {
-        console.log("본문을 찾을 수 없습니다.");
-        return;
-    }
+    const ins = document.createElement("ins");
 
-    const h2List = content.querySelectorAll("h2");
+    ins.className = "adsbygoogle";
+    ins.style.display = "block";
 
-    console.log("H2 개수 :", h2List.length);
+    ins.setAttribute("data-ad-client", "ca-pub-4898816539687840");
+    ins.setAttribute("data-ad-slot", "3853922004");   // 상단 광고 슬롯
+    ins.setAttribute("data-ad-format", "auto");
+    ins.setAttribute("data-full-width-responsive", "true");
 
-    let inserted = 0;
+    wrapper.appendChild(ins);
 
-    h2List.forEach((h2, index) => {
+    return wrapper;
+}
 
-        // 짝수 H2만
-        if ((index + 1) % 2 !== 0)
-            return;
 
-        const wrapper = document.createElement("div");
-        wrapper.style.margin = "60px 0";
+// 본문(H2 위) 광고
+function createContentAdsense() {
 
-        const ins = document.createElement("ins");
+    const wrapper = document.createElement("div");
+    wrapper.style.margin = "60px 0";
 
-        ins.className = "adsbygoogle";
-        ins.style.display = "block";
+    const ins = document.createElement("ins");
 
-        ins.setAttribute("data-ad-client", "ca-pub-4898816539687840");
-        ins.setAttribute("data-ad-slot", "8397013692");
-        ins.setAttribute("data-ad-format", "auto");
-        ins.setAttribute("data-full-width-responsive", "true");
+    ins.className = "adsbygoogle";
+    ins.style.display = "block";
 
-        wrapper.appendChild(ins);
+    ins.setAttribute("data-ad-client", "ca-pub-4898816539687840");
+    ins.setAttribute("data-ad-slot", "8397013692");   // 본문 광고 슬롯
+    ins.setAttribute("data-ad-format", "auto");
+    ins.setAttribute("data-full-width-responsive", "true");
 
-        h2.parentNode.insertBefore(wrapper, h2);
+    wrapper.appendChild(ins);
 
-        try {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-            inserted++;
-        } catch (e) {
-            console.log(e);
-        }
-
-    });
-
-    console.log("광고 삽입 :", inserted);
-
-});
+    return wrapper;
+}
