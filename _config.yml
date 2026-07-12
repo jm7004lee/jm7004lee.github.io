@@ -24,6 +24,8 @@ social:
   name: Kim Cat
   links:
     - https://github.com/jm7004lee
+    - mailto:jm7004lee@ync.ac.kr
+    - https://www.youtube.com/@행복습관-119
 
 # Site Verification Settings
 webmaster_verifications:
@@ -69,7 +71,7 @@ pageviews:
 #     light — Use the light color scheme
 #     dark — Use the dark color scheme
 #
-theme_mode: # [light | dark]
+theme_mode: dark
 
 # The CDN endpoint for media resources.
 # Notice that once it is assigned, the CDN url
