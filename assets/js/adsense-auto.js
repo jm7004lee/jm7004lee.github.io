@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // ==================================================
     // 광고 생성 함수
     // ==================================================
-    function createAd(slot) {
+    function createAd(slot, format = "auto") {
 
         const wrapper = document.createElement("div");
         wrapper.style.margin = "30px 0 60px";
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         ins.setAttribute("data-ad-client", "ca-pub-4898816539687840");
         ins.setAttribute("data-ad-slot", slot);
-        ins.setAttribute("data-ad-format", "auto");
+        ins.setAttribute("data-ad-format", format);
         ins.setAttribute("data-full-width-responsive", "true");
 
         wrapper.appendChild(ins);
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ==================================================
     // 메인 페이지
-    // #post-list 바로 위에 광고
+    // #post-list 바로 위 광고
     // ==================================================
     if (isHome) {
 
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // ==================================================
-    // 게시글이 아니면 H2 광고 종료
+    // 게시글이 아니면 H2 광고 및 하단 광고 종료
     // ==================================================
     if (!content) {
         return;
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ==================================================
     // H2 아래 광고
-    // 1, 3, 6, 9번째 H2만 광고 삽입
+    // 1, 3, 6, 9번째 H2에만 삽입
     // ==================================================
     const h2List = content.querySelectorAll("h2");
 
@@ -146,5 +146,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     console.log("본문 광고 :", inserted);
+
+    // ==================================================
+    // 본문 맨 아래 멀티플렉스 광고
+    // ==================================================
+
+    const multiplexAd = createAd("7163747094", "autorelaxed");
+
+    multiplexAd.style.margin = "50px 0 30px";
+
+    // 본문 마지막에 추가
+    content.appendChild(multiplexAd);
+
+    try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        console.log("멀티플렉스 광고 삽입");
+    } catch (e) {
+        console.log(e);
+    }
 
 });
