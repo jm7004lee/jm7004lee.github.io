@@ -1,7 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     // -----------------------------
-    // 본문 찾기 (게시글에서만 사용)
+    // 현재 URL
+    // -----------------------------
+    const path = window.location.pathname.toLowerCase();
+
+    const isHome =
+        path === "/" ||
+        path === "/index.html";
+
+    // -----------------------------
+    // 본문 찾기
     // -----------------------------
     const content =
         document.querySelector("article .content") ||
@@ -9,51 +18,65 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelector(".content");
 
     // -----------------------------
-    // 홈 여부 확인
+    // 광고 생성 함수
     // -----------------------------
-    const isHome =
-        window.location.pathname === "/" ||
-        window.location.pathname === "";
+    function createAd(slot) {
+
+        const wrapper = document.createElement("div");
+
+        const ins = document.createElement("ins");
+
+        wrapper.style.margin = "30px 0 60px";
+
+        ins.className = "adsbygoogle";
+        ins.style.display = "block";
+
+        ins.setAttribute("data-ad-client", "ca-pub-4898816539687840");
+        ins.setAttribute("data-ad-slot", slot);
+        ins.setAttribute("data-ad-format", "auto");
+        ins.setAttribute("data-full-width-responsive", "true");
+
+        wrapper.appendChild(ins);
+
+        return wrapper;
+    }
 
     // -----------------------------
-    // 상단 광고
-    // 홈 : Header 아래
-    // 게시글 : 제목(H1) 아래
+    // 홈이면 Header 아래 광고
     // -----------------------------
     if (isHome) {
 
-        const header = document.querySelector("#topbar-wrapper");
+        console.log("메인 페이지 감지");
+
+        const header = document.getElementById("topbar-wrapper");
 
         if (header) {
 
-            const wrapper = document.createElement("div");
-            wrapper.style.margin = "30px auto 50px";
-            wrapper.style.maxWidth = "900px";
+            const ad = createAd("3853922004");
 
-            const ins = document.createElement("ins");
+            ad.style.maxWidth = "900px";
+            ad.style.margin = "30px auto 50px";
 
-            ins.className = "adsbygoogle";
-            ins.style.display = "block";
-
-            ins.setAttribute("data-ad-client", "ca-pub-4898816539687840");
-            ins.setAttribute("data-ad-slot", "3853922004");
-            ins.setAttribute("data-ad-format", "auto");
-            ins.setAttribute("data-full-width-responsive", "true");
-
-            wrapper.appendChild(ins);
-
-            // Header 바로 아래 삽입
-            header.insertAdjacentElement("afterend", wrapper);
+            header.insertAdjacentElement("afterend", ad);
 
             try {
                 (adsbygoogle = window.adsbygoogle || []).push({});
-                console.log("홈 상단 광고 삽입");
             } catch (e) {
                 console.log(e);
             }
+
+        } else {
+
+            console.log("topbar-wrapper를 찾지 못했습니다.");
+
         }
 
-    } else {
+    }
+
+    // -----------------------------
+    // 메인이 아니면 제목 아래 광고
+    // -----------------------------
+    else {
 
         const title =
             document.querySelector("article h1") ||
@@ -62,72 +85,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (title) {
 
-            const wrapper = document.createElement("div");
-            wrapper.style.margin = "30px 0 60px";
+            console.log("게시글/기타 페이지");
 
-            const ins = document.createElement("ins");
+            const ad = createAd("3853922004");
 
-            ins.className = "adsbygoogle";
-            ins.style.display = "block";
-
-            ins.setAttribute("data-ad-client", "ca-pub-4898816539687840");
-            ins.setAttribute("data-ad-slot", "3853922004");
-            ins.setAttribute("data-ad-format", "auto");
-            ins.setAttribute("data-full-width-responsive", "true");
-
-            wrapper.appendChild(ins);
-
-            // 제목 아래 삽입
-            title.insertAdjacentElement("afterend", wrapper);
+            title.insertAdjacentElement("afterend", ad);
 
             try {
                 (adsbygoogle = window.adsbygoogle || []).push({});
-                console.log("게시글 상단 광고 삽입");
             } catch (e) {
                 console.log(e);
             }
+
         }
 
     }
 
     // -----------------------------
-    // 게시글이 아니면 여기서 종료
+    // 게시글이 아니면 H2 광고는 종료
     // -----------------------------
-    if (!content) {
+    if (!content)
         return;
-    }
 
     // -----------------------------
-    // 홀수 H2 위 광고
+    // H2 광고
     // -----------------------------
     const h2List = content.querySelectorAll("h2");
-
-    console.log("H2 개수 :", h2List.length);
 
     let inserted = 0;
 
     h2List.forEach((h2, index) => {
 
-        // 홀수 H2만 (1,3,5...)
         if ((index + 1) % 2 === 0)
             return;
 
-        const wrapper = document.createElement("div");
-        wrapper.style.margin = "60px 0";
+        const ad = createAd("8397013692");
 
-        const ins = document.createElement("ins");
+        ad.style.margin = "60px 0";
 
-        ins.className = "adsbygoogle";
-        ins.style.display = "block";
-
-        ins.setAttribute("data-ad-client", "ca-pub-4898816539687840");
-        ins.setAttribute("data-ad-slot", "8397013692");
-        ins.setAttribute("data-ad-format", "auto");
-        ins.setAttribute("data-full-width-responsive", "true");
-
-        wrapper.appendChild(ins);
-
-        h2.parentNode.insertBefore(wrapper, h2);
+        h2.parentNode.insertBefore(ad, h2);
 
         try {
             (adsbygoogle = window.adsbygoogle || []).push({});
