@@ -4,6 +4,9 @@ icon: fas fa-info-circle
 order: 4
 ---
 
+> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
+{: .prompt-tip }
+
 # About
 
 ## 여행은 새로운 경험을 기록하는 가장 좋은 방법입니다.
