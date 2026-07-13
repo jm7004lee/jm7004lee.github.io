@@ -1,21 +1,20 @@
 #  The contact options.
-
 - type: github
   icon: "fab fa-github"
-
-- type: youtube
-  icon: "fab fa-youtube"
-
-- type: naver
+- type: blog
   icon: "fas fa-blog"
-
+  url: "https://blog.naver.com/yh7004lee" # "https://keep-on-seungriing.tistory.com/"
 - type: email
   icon: "fas fa-envelope"
-  noblank: true
-
+  noblank: true # open link in current tab
+- type: youtube
+  icon: "fab fa-youtube" # icons powered by <https://fontawesome.com/>
+  url: "https://www.youtube.com/@행복습관-119" # Fill with your Linkedin homepage
 - type: rss
   icon: "fas fa-rss"
   noblank: true
+
+  
 # Uncomment and complete the url below to enable more contact options
 #
 # - type: mastodon
